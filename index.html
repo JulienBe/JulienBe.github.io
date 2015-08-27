@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Julienbe.GitHub.io by JulienBe</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Julienbe.GitHub.io</h1>
+        <h2>Cheat sheet</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/JulienBe" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="bloom-filter" class="anchor" href="#bloom-filter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bloom filter</h1>
+
+<p>A Bloom filter is a data structure designed to tell you, rapidly and <strong>memory-efficiently</strong>, whether an element is present in a set. </p>
+
+<h2>
+<a id="it-looks-like-this-" class="anchor" href="#it-looks-like-this-" aria-hidden="true"><span class="octicon octicon-link"></span></a>It looks like this :</h2>
+
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="add" class="anchor" href="#add" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add</h2>
+
+<p>When you enter something in the set, it goes trough multiples <strong>hash functions</strong>. Each function will turn a cell of the array on. So if you add multiples elements they might eventually end up turning on cells that are already turned on.</p>
+
+<ul>
+<li>element -&gt; hash1() -&gt; cell x</li>
+<li>element -&gt; hash2() -&gt; cell y</li>
+<li>element -&gt; hash3() -&gt; cell z</li>
+</ul>
+
+<h2>
+<a id="get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get</h2>
+
+<p>The element you're trying to get will go trough the same hash functions, this will tell you which cells to look for. If one of those is off, the element cannot be there. If all are on, there is a fairly good chance that it has already been added.</p>
+
+<p>You may have <strong>false positives</strong> but <strong>no false negative</strong>.</p>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51057524-6");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
