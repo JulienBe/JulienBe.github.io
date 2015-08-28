@@ -60,10 +60,19 @@
 
 <p>When you enter something in the set, it goes trough multiples <strong>hash functions</strong> and each of them produce turn a cell of the array on. So if you add multiples elements they might eventually end up turning on cells that are already turned on.</p>
 
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
 <ul>
-<li>element1 -&gt; hash1() -&gt; cell x</li>
-<li>element1 -&gt; hash2() -&gt; cell y</li>
-<li>element1 -&gt; hash3() -&gt; cell z</li>
+<li>Ant -&gt; hash1() -&gt; cell 1</li>
+<li>Ant -&gt; hash2() -&gt; cell 5</li>
+<li><p>Ant -&gt; hash3() -&gt; cell 9</p></li>
+<li><p>MassEffect -&gt; hash1() -&gt; cell 0</p></li>
+<li>MassEffect -&gt; hash2() -&gt; cell 4</li>
+<li><p>MassEffect -&gt; hash3() -&gt; cell 8</p></li>
+<li><p>Manjaro -&gt; hash1() -&gt; cell 1 (Already on)</p></li>
+<li>Manjaro -&gt; hash2() -&gt; cell 4 (Already on)</li>
+<li>Manjaro -&gt; hash3() -&gt; cell 9 (Already on)</li>
 </ul>
 
 <h2>
