@@ -21,8 +21,7 @@
 
 <p>A Bloom filter is a data structure designed to tell you, rapidly and <strong>memory-efficiently</strong>, whether an element is present in a set. </p>
 
-<h2>
-<a id="it-looks-like-this-" class="anchor" href="#it-looks-like-this-" aria-hidden="true"><span class="octicon octicon-link"></span></a>It looks like this :</h2>
+<p>It looks like this :</p>
 
 <table>
 <thead>
@@ -58,22 +57,26 @@
 <h2>
 <a id="add" class="anchor" href="#add" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add</h2>
 
-<p>When you enter something in the set, it goes trough multiples <strong>hash functions</strong> and each of them produce turn a cell of the array on. So if you add multiples elements they might eventually end up turning on cells that are already turned on.</p>
+<p>When you enter something in the set, it goes trough multiples <strong>hash functions</strong> and each of them produce turn a cell of the array on. So if you add multiples elements they might eventually end up turning on cells that are already turned on.
+You'll want your hash functions to be evenly and randomly distributed</p>
 
 <h3>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
-<ul>
-<li>Ant -&gt; hash1() -&gt; cell 1</li>
-<li>Ant -&gt; hash2() -&gt; cell 5</li>
-<li><p>Ant -&gt; hash3() -&gt; cell 9</p></li>
-<li><p>MassEffect -&gt; hash1() -&gt; cell 0</p></li>
-<li>MassEffect -&gt; hash2() -&gt; cell 4</li>
-<li><p>MassEffect -&gt; hash3() -&gt; cell 8</p></li>
-<li><p>Manjaro -&gt; hash1() -&gt; cell 1 (Already on)</p></li>
-<li>Manjaro -&gt; hash2() -&gt; cell 4 (Already on)</li>
-<li>Manjaro -&gt; hash3() -&gt; cell 9 (Already on)</li>
-</ul>
+<pre><code>* Ant -&gt; hash1() -&gt; cell 1
+* Ant -&gt; hash2() -&gt; cell 5
+* Ant -&gt; hash3() -&gt; cell 9
+</code></pre>
+
+<pre><code>* MassEffect -&gt; hash1() -&gt; cell 0
+* MassEffect -&gt; hash2() -&gt; cell 4
+* MassEffect -&gt; hash3() -&gt; cell 8
+</code></pre>
+
+<pre><code>* Manjaro -&gt; hash1() -&gt; cell 1 (Already on)
+* Manjaro -&gt; hash2() -&gt; cell 4 (Already on)
+* Manjaro -&gt; hash3() -&gt; cell 9 (Already on)
+</code></pre>
 
 <h2>
 <a id="get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get</h2>
@@ -89,10 +92,12 @@
 <li>You can't remove an item from an hash function... 'cause the cells might have been turned on by other things too</li>
 <li>The more saturated the array become, the more false positive you're going to get.</li>
 <li>The bigger the array, the less probability of false positive</li>
-<li>The approximate false positive rate can be calculated with this :
-&gt; (1 - E<sup>-((kn)/m)</sup>)<sup>k</sup>
-</li>
+<li>The approximate false positive rate can be calculated with this :</li>
 </ul>
+
+<blockquote>
+<p>(1 - E<sup>-((kn)/m)</sup>)<sup>k</sup></p>
+</blockquote>
 
       <footer class="site-footer">
 
