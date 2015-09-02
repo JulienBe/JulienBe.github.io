@@ -98,8 +98,8 @@
 <th>5</th>
 <th>6</th>
 <th>7</th>
-<th>8</th>
-<th>9</th>
+<th>...</th>
+<th>m</th>
 </tr>
 </thead>
 <tbody>
@@ -117,9 +117,6 @@
 </tr>
 </tbody>
 </table>
-
-<h2>
-<a id="add" class="anchor" href="#add" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add</h2>
 
 <p>When you enter something in the set, it goes trough multiples <strong>hash functions</strong> and each of them produce turn a cell of the array on. So if you add multiples elements they might eventually end up turning on cells that are already turned on.
 You'll want your hash functions to be evenly and randomly distributed</p>
@@ -147,7 +144,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 
 <p>The element you're trying to get will go trough the same hash functions, this will tell you which cells to look for. If one of those is off, the element cannot be there. If all are on, there is a fairly good chance that it has already been added.</p>
 
-<p>You may have <strong>false positives</strong> but <strong>no false negative</strong>.</p>
+<p>You may have <strong>false positives</strong> but <strong>no false negative</strong>. The error rate can be tuned by varying the lenght of the array and the number of hash functions</p>
 
 <h2>
 <a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
