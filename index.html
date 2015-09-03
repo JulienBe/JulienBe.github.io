@@ -165,22 +165,28 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 <a id="tuning" class="anchor" href="#tuning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tuning</h2>
 
 <blockquote>
-<p>(1 - E<sup>-((kn)/m)</sup>)<sup>k</sup></p>
+<p>(1 - e<sup>-((kn)/m)</sup>)<sup>k</sup></p>
 </blockquote>
 
 <p>Ok this deserve some explanations :</p>
 
-<p>n is the number of expected member
-k is the number of hash functions
-m is the number of bits</p>
+<p><strong>n</strong> is the number of expected member
+<strong>k</strong> is the number of hash functions
+<strong>m</strong> is the number of bits</p>
 
 <ol>
-<li>With an empty bit vector and a good hashing algorithim with an uniform distribution, the probability of a particular element ending up in a particular bit is just 1/m</li>
-<li>After inserting this element, the probability of an other element ending up in an unset bit is 1 - 1/m</li>
-<li>And the probability that a particular bit is not set by k hash functions is (1 - 1/m)<sup>k</sup>
+<li>With an empty bit vector and a good hashing algorithm with an uniform distribution, the probability of a particular element ending up in a particular bit is just <strong>1/m</strong>
 </li>
-<li>If you insert n elements, the probability that this bit isnt set is (1 - 1/m)<sup>k.n</sup>
+<li>After inserting this element, the probability of an other element ending up in an unset bit is <strong>1 - 1/m</strong>
 </li>
+<li>And the probability that a particular bit is not set by <strong>k</strong> hash functions is <strong>(1 - 1/m)<sup>k</sup></strong>
+</li>
+<li>If you insert <strong>n</strong> elements, the probability that this bit isn't set is <strong>(1 - 1/m)<sup>k.n</sup></strong>
+</li>
+<li>It turns, and I need to dig on that, that <strong>(1 - 1/m)<sup>k.n</sup></strong> is roughly equivalent to <strong>1 - e<sup>-kn/m</sup></strong>
+</li>
+<li>When we try to figure out the probability of false positive, we want to know the probability that all <strong>k</strong> bits are set to one by other elements</li>
+<li>So this probability, is the probability that a bit is set ^ the number of bits we will verify <strong>(1 - e<sup>-kn/m)<sup>k</sup></sup></strong> </li>
 </ol>
 
 <h1>
