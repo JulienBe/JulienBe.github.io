@@ -180,14 +180,14 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 <p><strong>1/m</strong></p>
 
 <ul>
-<li>After inserting this element, the probability of an other element ending up in an unset bit is <strong>1 - 1/m</strong>
+<li>After inserting this element, the probability of a bit not being set is <strong>1 - 1/m</strong>
 </li>
 </ul>
 
 <p><strong>1 - 1/m</strong></p>
 
 <ul>
-<li>And the probability that a particular bit is not set by <strong>k</strong> hash functions is <strong>(1 - 1/m)<sup></sup></strong><em>k</em><strong></strong>
+<li>And this probability after performing <strong>k</strong> hash functions is <strong>(1 - 1/m)<sup></sup></strong><em>k</em><strong></strong>
 </li>
 </ul>
 
@@ -199,6 +199,12 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </ul>
 
 <p><strong>(1 - 1/m)<sup>k</sup></strong><em>.n</em><strong></strong></p>
+
+<ul>
+<li>On the opposite, the probability that is set is </li>
+</ul>
+
+<p><strong><em>1 -</em></strong> <strong>(1 - 1/m)<sup>k</sup></strong><em>.n</em><strong></strong></p>
 
 <ul>
 <li>It turns, and I need to dig on that, that <strong>(1 - 1/m)<sup>k.n</sup></strong> is roughly equivalent to <strong>1 - e<sup>-kn/m</sup></strong>
