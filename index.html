@@ -17,6 +17,115 @@
 
     <section class="main-content">
       <h1>
+<a id="union-find" class="anchor" href="#union-find" aria-hidden="true"><span class="octicon octicon-link"></span></a>Union Find</h1>
+
+<h2>
+<a id="quick-find---eager-approach" class="anchor" href="#quick-find---eager-approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Find - Eager approach</h2>
+
+<p>Begin with id[], if two given objects have the same id, they are connected</p>
+
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+
+<p>union(4, 3)</p>
+
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td><strong>3</strong></td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+
+<p>union(3, 8)</p>
+
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td><strong>8</strong></td>
+<td><strong>8</strong></td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+
+<p>etc..</p>
+
+<p>So there can ben a lot of changes. Checking if two elements are connected is very fast but building the array is very slow</p>
+
+<h1>
 <a id="order-of-growth" class="anchor" href="#order-of-growth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Order of growth</h1>
 
 <table>
