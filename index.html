@@ -123,7 +123,31 @@
 
 <p>etc..</p>
 
-<p>So there can ben a lot of changes. Checking if two elements are connected is very fast but building the array is very slow</p>
+<p>So there can ben a lot of changes. Checking if two elements are connected is very fast but building the array is very slow. N union on N objects is quadratic</p>
+
+<h2>
+<a id="quick-find---lazy-approach" class="anchor" href="#quick-find---lazy-approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Find - Lazy approach</h2>
+
+<pre><code>0-1-2-3-4-5-6-7-8-9 
+</code></pre>
+
+<p>union(4, 3)</p>
+
+<pre><code>0-1-2-3-5-6-7-8-9 
+      |
+      4
+</code></pre>
+
+<p>union(3, 8)</p>
+
+<pre><code>0-1-2-5-6-7-8-9 
+            |
+            3
+            |
+            8
+</code></pre>
+
+<p>Now building the tree is quick but finding if two elements are connected can be quite slow</p>
 
 <h1>
 <a id="order-of-growth" class="anchor" href="#order-of-growth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Order of growth</h1>
