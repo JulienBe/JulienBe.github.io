@@ -17,6 +17,76 @@
 
     <section class="main-content">
       <h1>
+<a id="typical-memory-usage" class="anchor" href="#typical-memory-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Typical memory usage</h1>
+
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Bytes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>1</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>1</td>
+</tr>
+<tr>
+<td>char</td>
+<td>2</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+</tr>
+<tr>
+<td>long</td>
+<td>8</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>char[]</td>
+<td>2N + 24</td>
+</tr>
+<tr>
+<td>int[]</td>
+<td>4N + 24</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Object</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Reference</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Padding</td>
+<td>Multiple of 8 bytes</td>
+</tr>
+</tbody>
+</table>
+
+<h1>
 <a id="union-find" class="anchor" href="#union-find" aria-hidden="true"><span class="octicon octicon-link"></span></a>Union Find</h1>
 
 <h2>
@@ -181,7 +251,7 @@
 <h2>
 <a id="quick-union---weighted" class="anchor" href="#quick-union---weighted" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Union - Weighted</h2>
 
-<p>The difference here is that we link to root of the smaller tree to the root of the taller tree. The goal is to avoid getting tall trees</p>
+<p>The difference here is that we link to root of the smaller tree to the root of the bigger tree. The goal is to avoid getting tall trees</p>
 
 <p>So instead of getting </p>
 
