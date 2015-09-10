@@ -343,6 +343,153 @@
 <h1>
 <a id="mysql-replication" class="anchor" href="#mysql-replication" aria-hidden="true"><span class="octicon octicon-link"></span></a>MySQL replication</h1>
 
+<p>One of the difficulties with a large and active MySQL database is making clean backups without having to bring the server down. Otherwise, a backup may slow down the system and there may be inconsistency with data, since related tables may be changed while another is being backed up. Taking the server down will ensure consistency of data, but it means interruption of service to users. Sometimes this is necessary and unavoidable, but daily server outages for backing up data may be unacceptable. A simple alternative method to ensure reliable backups without having to shut down the server daily is to set up replication for MySQL.</p>
+
+<p>Typically, replication is a system configuration whereby the MySQL server, known in this context as a master server, houses the data and handles client requests, while another MySQL server (a slave server) contains a complete copy of the data and duplicates all SQL statements in which data is changed on the master server right after it happens. There are several uses for replication (e.g., load balancing), but the concern of this article has to do with using replication for data backups. You can set up a separate server to be a slave and then once a day turn replication off to make a clean backup. When you're done, replication can be restarted and the slave will automatically query the master for the changes to the data that it missed while it was offline. Replication is an excellent feature and it's part of MySQL. You just need to set it up.</p>
+
+<h2>
+<a id="the-replication-process" class="anchor" href="#the-replication-process" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Replication Process</h2>
+
+<p>Before explaining how to set up replication, let me quickly explain the steps that MySQL goes through to maintain a replicated server. The process is different depending on the version of MySQL. For purposes of this article, my comments will be for version 4.0 or higher, since most systems now are using the later versions.</p>
+
+<p>When replication is running, basically, as SQL statements are executed on the master server, MySQL records them in a binary log (bin.log) along with a log position identification number. The slave server in turn, through an IO thread, regularly and very often reads the master's binary log for any changes. If it finds a change, it copies the new statements to its relay log (relay.log). It then records the new position identification number in a file (master.info) on the slave server. The slave then goes back to checking the master binary log, using the same IO thread. When the slave server detects a change to its relay log, through an SQL thread the slave executes the new SQL statement recorded in the relay log. As a safeguard, the slave also queries the master server through the SQL thread to compare its data with the master's data. If the comparison shows inconsistency, the replication process is stopped and an error message is recorded in the slave's error log (error.log). If the results of the query match, the new log position identification number is recorded in a file on the slave (relay-log.info) and the slave waits for another change to the relay log file.</p>
+
+<p>This process may seem involved and complicated at first glance, but it all occurs quickly, it isn't a significant drain on the master server, and it ensures reliable replication. Also, it's surprisingly easy to set up. It only requires a few lines of options to be added to the configuration file (i.e., my.cnf) on the master and slave servers. If you're dealing with a new server, you'll need to copy the databases on the master server to the slave to get it caught up. Then it's merely a matter of starting the slave for it to begin replicating.</p>
+
+<h2>
+<a id="the-replication-user" class="anchor" href="#the-replication-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Replication User</h2>
+
+<p>There are only a few steps to setting up replication. The first step is to set up a user account to use only for replication. It's best not to use an existing account for security reasons. To do this, enter an SQL statement like the following on the master server, logged in as root or a user that has GRANT OPTION privileges:</p>
+
+<div class="highlight highlight-sql"><pre><span class="pl-k">GRANT</span> REPLICATION SLAVE, REPLICATION CLIENT
+    <span class="pl-k">ON</span> <span class="pl-k">*</span>.<span class="pl-k">*</span>
+    TO <span class="pl-s"><span class="pl-pds">'</span>replicant<span class="pl-pds">'</span></span>@<span class="pl-s"><span class="pl-pds">'</span>slave_host<span class="pl-pds">'</span></span>
+    IDENTIFIED BY <span class="pl-s"><span class="pl-pds">'</span>my_pwd<span class="pl-pds">'</span></span>;</pre></div>
+
+<p>In this SQL statement, the user account replicant is granted only what's needed for replication. The user name can be almost anything. The host name (or IP address) is given in quotes. You should enter this same statement on the slave server with the same user name and password, but with the master's host name or IP address. This way, if the master fails and will be down for a while, you could redirect users to the slave with DNS or by some other method. When the master is back up, you can then use replication to get it up to date by temporarily making it a slave to the former slave server. Incidentally, if you upgraded MySQL to version 4.0 recently, but didn't upgrade your mysql database, the GRANT statement above won't work because these privileges didn't exist in the earlier versions. For information on fixing this problem, see MySQL's documentation on Upgrading the Grants Tables.</p>
+
+<h2>
+<a id="configuring-the-servers" class="anchor" href="#configuring-the-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuring the Servers</h2>
+
+<p>Once the replication user is set up on both servers, we will need to add some lines to the MySQL configuration file on the master and on the slave server. Depending on the type of operating system, the file will probably be called my.cnf or my.ini. On Unix-type systems, the configuration file is usually located in the /etc directory. On Windows systems, it's usually located in c:\ or in c:\Windows. Using a text editor, add the following lines to the configuration file, under the [mysqld] group heading:</p>
+
+<div class="highlight highlight-sql"><pre>server<span class="pl-k">-</span>id <span class="pl-k">=</span> <span class="pl-c1">1</span>
+log<span class="pl-k">-</span>bin <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span><span class="pl-c1">bin</span>.<span class="pl-c1">log</span></pre></div>
+
+<p>The server identification number is an arbitrary number to identify the master server. Almost any whole number is fine. A different one should be assigned to the slave server to keep them straight. The second line above instructs MySQL to perform binary logging to the path and file given. The actual path and file name is mostly up to you. Just be sure that the directory exists and the user mysql is the owner, or at least has permission to write to the directory. Also, for the file name use the suffix of ".log" as shown here. It will be replaced automatically with an index number (e.g., ".000001") as new log files are created when the server is restarted or the logs are flushed.</p>
+
+<p>For the slave server, we will need to add a few more lines to the configuration file. We'll have to provide information on connecting to the master server, as well as more log file options. We would add lines similar to the following to the slave's configuration file: </p>
+
+<div class="highlight highlight-sql"><pre>server<span class="pl-k">-</span>id <span class="pl-k">=</span> <span class="pl-c1">2</span>
+
+master<span class="pl-k">-</span>host <span class="pl-k">=</span> <span class="pl-c1">mastersite</span>.<span class="pl-c1">com</span>
+master<span class="pl-k">-</span>port <span class="pl-k">=</span> <span class="pl-c1">3306</span>
+master<span class="pl-k">-</span>user <span class="pl-k">=</span> replicant
+master<span class="pl-k">-</span>password <span class="pl-k">=</span> my_pwd
+
+log<span class="pl-k">-</span>bin <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span><span class="pl-c1">bin</span>.<span class="pl-c1">log</span>
+log<span class="pl-k">-</span>bin<span class="pl-k">-</span>index <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span>log<span class="pl-k">-</span><span class="pl-c1">bin</span>.<span class="pl-c1">index</span>
+log<span class="pl-k">-</span>error <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span><span class="pl-c1">error</span>.<span class="pl-c1">log</span>
+
+relay<span class="pl-k">-</span>log <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span><span class="pl-c1">relay</span>.<span class="pl-c1">log</span>
+relay<span class="pl-k">-</span>log<span class="pl-k">-</span>info<span class="pl-k">-</span>file <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span>relay<span class="pl-k">-</span><span class="pl-c1">log</span>.<span class="pl-c1">info</span>
+relay<span class="pl-k">-</span>log<span class="pl-k">-</span>index <span class="pl-k">=</span> <span class="pl-k">/</span>var<span class="pl-k">/</span>log<span class="pl-k">/</span>mysql<span class="pl-k">/</span>relay<span class="pl-k">-</span><span class="pl-c1">log</span>.<span class="pl-c1">index</span></pre></div>
+
+<p>This may seem like a lot, but it's pretty straightforward once you pick it apart. The first line is the identification number for the slave server. If you set up more than one slave server, give them each a different number. If you're only using replication for backing up your data, though, you probably won't need more than one slave server. The next set of lines provides information on the master server: the host name as shown here, or the IP address of the master may be given. Next, the port to use is given. Port 3306 is the default port for MySQL, but another could be used for performance or security considerations. The next two lines provide the user name and password for logging into the master server.</p>
+
+<p>The last two stanzas above set up logging. The second to last stanza starts binary logging as we did on the master server, but this time on the slave. This is the log that can be used to allow the master and the slave to reverse roles, as mentioned earlier. The binary log index file (log-bin.index) is for recording the name of the current binary log file to use. As the server is restarted or the logs are flushed, the current log file changes and its name is recorded here. The log-error option establishes an error log. If you don't already have this set up, you should, since it's where any problems with replication will be recorded. The last stanza establishes the relay log and related files mentioned earlier. The relay log makes a copy of each entry in the master server's binary log for performance's sake, the relay-log-info-file option names the file where the slave's position in the master's binary log will be noted, and the relay log index file is for keeping track of the name of the current relay log file to use for replicating.</p>
+
+<h2>
+<a id="copying-databases-and-starting-replication" class="anchor" href="#copying-databases-and-starting-replication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copying Databases and Starting Replication</h2>
+
+<p>If you're setting up a new master server that doesn't contain data, then there's nothing left to do but restart the slave server. However, if you're setting up replication with an existing server that already has data on it, you will need to make an initial backup of the databases and copy it to the slave server. There are many methods to do this; for our examples, we'll use the utility mysqldump to make a backup while the server is running. However, there's still the problem with attaining consistency of data on an active server. Considering the fact that once you set up replication you may never have to shut down your server for backups again, it might be worth while at least to lock the users out this one last time to get a clean, consistent backup. To run the master server so that only root has access, we can reset the variable max_connections like so:</p>
+
+<div class="highlight highlight-sql"><pre>SHOW VARIABLES <span class="pl-k">LIKE</span> <span class="pl-s"><span class="pl-pds">'</span>max_connections<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">+</span><span class="pl-c">-----------------+-------+</span>
+| Variable_name   | Value |
+<span class="pl-k">+</span><span class="pl-c">-----------------+-------+</span>
+| max_connections | <span class="pl-c1">100</span>   |
+<span class="pl-k">+</span><span class="pl-c">-----------------+-------+</span>
+
+<span class="pl-k">SET</span> GLOBAL max_connections <span class="pl-k">=</span> <span class="pl-c1">0</span>;</pre></div>
+
+<p>The first SQL statement isn't necessary, but we may want to know the initial value of the max_connections variable so that we can change it back when the backup is finished. Although setting the variable to a value of 0 suggests that no connections are allowed, one connection is actually reserved for the root user. Of course, this will only prevent any new connections. To see if there are any connections still running, enter SHOW PROCESSLIST;. To terminate any active processes, you can use the KILL statement.</p>
+
+<p>With exclusive access to the server, using mysqldump is usually very quick. We would enter the following from the command line on the master server:</p>
+
+<div class="highlight highlight-sql"><pre>mysqldump <span class="pl-c">--user=root --password=my_pwd \</span>
+      <span class="pl-c">--extended-insert --all-databases \</span>
+      <span class="pl-c">--master-data  &gt; /tmp/backup.sql  </span></pre></div>
+
+<p>This will create a text file containing SQL statements to create all of the databases and tables with data. The --extended-insert option will create multiple-row INSERT statements and thereby allow the backup to run faster, for the least amount of down time or drain on services. The --master-data option above locks all of the tables during the dump to prevent data from being changed, but allows users to continue reading the tables. With exclusive access, this feature isn't necessary. However, this option also adds a few lines like the following to the end of the dump file:</p>
+
+<div class="highlight highlight-sql"><pre><span class="pl-c">--</span>
+<span class="pl-c">-- Position to start replication from</span>
+<span class="pl-c">--</span>
+
+CHANGE MASTER TO MASTER_LOG_FILE<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>bin.000846<span class="pl-pds">'</span></span> ;
+CHANGE MASTER TO MASTER_LOG_POS<span class="pl-k">=</span><span class="pl-c1">427</span> ;</pre></div>
+
+<p>When the dump file is executed on the slave server, these last lines will record the name of the master's binary log file and the position in the log at the time of the backup, while the tables were locked. When replication is started, it will go to this log file and execute any SQL statements recorded starting from the position given. This is meant to ensure that any data changed while setting up the slave server isn't missed. To execute the dump file to set up the databases and data on the slave server, copy the dump file to the slave server, make sure MySQL is running, then enter something like the following on the slave:</p>
+
+<blockquote>
+<p>mysql --user=root --password=my_pwd &lt; /tmp/backup.sql</p>
+</blockquote>
+
+<p>This will execute all of the SQL statements in the dump file, which will include the CREATE and INSERT statements. Once the backed-up databases are loaded onto the slave server, execute the following SQL statement while logged in as root on the slave:</p>
+
+<blockquote>
+<p>START SLAVE;</p>
+</blockquote>
+
+<p>After this statement is run, the slave will connect to the master and get the changes it missed since the backup. From there, it will stay current by continuously checking the binary log as outlined before.</p>
+
+<h2>
+<a id="backups-with-replication" class="anchor" href="#backups-with-replication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Backups with Replication</h2>
+
+<p>With replication running, it's an easy task to make a backup of the data. You just need to temporarily stop the slave server from replicating by entering the following SQL statement while logging onto the slave server as root or a user with SUPER privileges: </p>
+
+<blockquote>
+<p>STOP SLAVE;</p>
+</blockquote>
+
+<p>The slave server knows the position where it left off in the binary log of the master server. So we can take our time making a backup of the replicated databases on the slave server. We can use any backup utility or method we prefer. When the backup is finished, we would enter the following SQL statement from the slave server as root to restart replication:</p>
+
+<blockquote>
+<p>START SLAVE;</p>
+</blockquote>
+
+<p>After entering this statement, there should be a flurry of activity on the slave as it executes the SQL statements that occurred while it was down. In a very short period of time it should be current</p>
+
+<h2>
+<a id="automating-backups" class="anchor" href="#automating-backups" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automating Backups</h2>
+
+<p>If replication and the backup process are working properly, we can write a simple shell script to stop replication, back up the data on the slave server, and start the slave again. Such a shell script would look something like this:</p>
+
+<div class="highlight highlight-sh"><pre><span class="pl-c">#!/bin/sh</span>
+
+date = <span class="pl-s"><span class="pl-pds">`</span>date +%Y%m%d<span class="pl-pds">`</span></span>
+
+mysqladmin --user=root --password=my_pwd stop-slave
+
+mysqldump --user=root --password=my_pwd --lock-all-tables \
+      --all-databases <span class="pl-k">&gt;</span> /backups/mysql/backup-<span class="pl-smi">${date}</span>.sql
+
+mysqladmin --user=root --password=my_pwd start-slave</pre></div>
+
+<p>In this example, we're using the mysqladmin utility to stop and start replication on the slave. On the first line, you may have noticed that we're capturing the date using the system function date and putting it into a good format (e.g., 20050615). This variable is used with mysqldump in the script for altering the name of the dump file each day. Of course, you can set the file path and the name of the dump file to your preferences. Notice that the date function and the formatting codes are enclosed in back-ticks (`), not single quotes (').</p>
+
+<p>This is a simple script. You may want to write something more elaborate and allow for error checking. You probably would also want to compress the dump files to save space and write them to a removable media like a tape or CD. Once you have your script set up, test it. If it works, you can add it to your crontab or whatever scheduling utility you use on your server.</p>
+
+<h2>
+<a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+
+<p>Replication is a useful administrative feature of MySQL. It's an excellent way to be assured of good regular backups of databases. There are more options and SQL statements available for replication than I was able to present here. I cover them individually in my book MySQL in a Nutshell. For active and large systems, you may want to set up more than one slave server for added protection of data. The configuration and concepts are the same for multiple slaves as it is for one slave. For extremely active and large databases, you might want to consider purchasing software like that offered by Emic. Their software costs a bit, but it does an excellent job of handing slave serves for backups and load balancing, especially.</p>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+
 <p>To make sure that the replication doesn't collides, make sure that the auto increment offset in my.cnf is set to even on one site, and on odd on the other</p>
 
 <h1>
@@ -476,7 +623,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 <p>You may have <strong>false positives</strong> but <strong>no false negative</strong>. The error rate can be tuned by varying the lenght of the array and the number of hash functions</p>
 
 <h2>
-<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+<a id="notes-1" class="anchor" href="#notes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
 
 <ul>
 <li>You can't remove an item from an hash function... 'cause the cells might have been turned on by other things too</li>
