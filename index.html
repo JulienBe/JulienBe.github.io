@@ -588,7 +588,29 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 <p>Space : O(n)</p>
 
 <h1>
-<a id="bloom-filter" class="anchor" href="#bloom-filter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bloom filter</h1>
+<a id="data-structures" class="anchor" href="#data-structures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Structures</h1>
+
+<h2>
+<a id="stack" class="anchor" href="#stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stack</h2>
+
+<p>lifo</p>
+
+<pre><code>[][][][][][] &lt;= Push
+             =&gt; Pop 
+</code></pre>
+
+<p>In array stack : careful for loitering</p>
+
+<h2>
+<a id="queue" class="anchor" href="#queue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Queue</h2>
+
+<p>fifo</p>
+
+<pre><code>Queue =&gt; [][][][][][] =&gt; Dequeue
+</code></pre>
+
+<h2>
+<a id="bloom-filter" class="anchor" href="#bloom-filter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bloom filter</h2>
 
 <p>A Bloom filter is a data structure designed to tell you, rapidly and <strong>memory-efficiently</strong>, whether an element is present in a set. </p>
 
@@ -646,15 +668,15 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 * Manjaro -&gt; hash3() -&gt; cell 9 (Already on)
 </code></pre>
 
-<h2>
-<a id="get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get</h2>
+<h3>
+<a id="get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get</h3>
 
 <p>The element you're trying to get will go trough the same hash functions, this will tell you which cells to look for. If one of those is off, the element cannot be there. If all are on, there is a fairly good chance that it has already been added.</p>
 
 <p>You may have <strong>false positives</strong> but <strong>no false negative</strong>. The error rate can be tuned by varying the lenght of the array and the number of hash functions</p>
 
-<h2>
-<a id="notes-1" class="anchor" href="#notes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+<h3>
+<a id="notes-1" class="anchor" href="#notes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h3>
 
 <ul>
 <li>You can't remove an item from an hash function... 'cause the cells might have been turned on by other things too</li>
@@ -663,8 +685,8 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 <li>The approximate false positive rate can be calculated with this :</li>
 </ul>
 
-<h2>
-<a id="tuning" class="anchor" href="#tuning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tuning</h2>
+<h3>
+<a id="tuning" class="anchor" href="#tuning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tuning</h3>
 
 <p>The probability of false positive : <strong>(1 - e<sup>-kn/m</sup>)<sup><sup>k</sup></sup></strong> </p>
 
