@@ -27,6 +27,54 @@
 </ul>
 
 <h1>
+<a id="go" class="anchor" href="#go" aria-hidden="true"><span class="octicon octicon-link"></span></a>Go</h1>
+
+<h2>
+<a id="slices-and-arrays" class="anchor" href="#slices-and-arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slices and Arrays</h2>
+
+<h3>
+<a id="arrays" class="anchor" href="#arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrays</h3>
+
+<p>An array type definition specifies a <strong>length</strong> and an <strong>element type</strong>. An array's size is fixed; its length is part of its type ([4]int and [5]int are distinct, incompatible types).</p>
+
+<div class="highlight highlight-source-go"><pre><span class="pl-k">var</span> <span class="pl-smi">a</span> [<span class="pl-c1">4</span>]<span class="pl-k">int</span>
+a[<span class="pl-c1">0</span>] = <span class="pl-c1">1</span>
+<span class="pl-smi">i</span> <span class="pl-k">:=</span> a[<span class="pl-c1">0</span>]
+<span class="pl-c">// i == 1</span></pre></div>
+
+<p>Arrays do not need to be initialized explicitly; the zero value of an array is a ready-to-use array</p>
+
+<p>The in-memory representation of [4]int is just four integer values laid out sequentially:</p>
+
+<p>Go's arrays are values. An array variable denotes the entire array; it is not a pointer to the first array element (as would be the case in C). This means that when you assign or pass around an array value you will make a copy of its contents. (To avoid the copy you could pass a pointer to the array, but then that's a pointer to an array, not an array.) One way to think about arrays is as a sort of struct but with indexed rather than named fields: a fixed-size composite value.</p>
+
+<p>An array literal can be specified like so:</p>
+
+<p>b := [2]string{"Penn", "Teller"}
+Or, you can have the compiler count the array elements for you:</p>
+
+<p>b := [...]string{"Penn", "Teller"}
+In both cases, the type of b is [2]string.</p>
+
+<h3>
+<a id="slices" class="anchor" href="#slices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slices</h3>
+
+<p>The type specification for a slice is []T, where T is the type of the elements of the slice. Unlike an array type, a <strong>slice type has no specified length.</strong></p>
+
+<p>A slice literal is declared just like an array literal, except you leave out the element count:</p>
+
+<p>letters := []string{"a", "b", "c", "d"}</p>
+
+<p>A slice can be created with the built-in function called make, which has the signature,</p>
+
+<p><em>func make([]Type, length, capacity) []T</em></p>
+
+<div class="highlight highlight-source-go"><pre><span class="pl-k">var</span> <span class="pl-smi">s</span> []<span class="pl-k">byte</span>
+s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span class="pl-c1">5</span>, <span class="pl-c1">5</span>)
+<span class="pl-c">// or s := make([]byte, 5)</span>
+<span class="pl-c">// s == []byte{0, 0, 0, 0, 0}</span></pre></div>
+
+<h1>
 <a id="typical-memory-usage" class="anchor" href="#typical-memory-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Typical memory usage</h1>
 
 <table>
