@@ -23,8 +23,25 @@
 
 <ul>
 <li>List images : docker images</li>
+<li>List all containers : docker ps -a</li>
 <li>Load an image into the container : docker run imageName</li>
+<li>docker run -i -t imageName /bin/bash : <strong>i</strong>nteractive with a <strong>t</strong>ty</li>
 </ul>
+
+<h2>
+<a id="data-volumes" class="anchor" href="#data-volumes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data volumes</h2>
+
+<p>It's a directory within one or more containers that bypasses the Union File System. They provide :</p>
+
+<ul>
+<li>Volumes are initialized when a container is created. If the container’s base image contains data at the specified mount point, that existing data is copied into the new volume upon volume initialization.</li>
+<li>Data volumes can be shared and reused among containers.</li>
+<li>Changes to a data volume are made directly.</li>
+<li>Changes to a data volume will not be included when you update an image.</li>
+<li>Data volumes persist even if the container itself is deleted.</li>
+</ul>
+
+<p>Data volumes are designed to persist data, independent of the container’s life cycle. Docker therefore never automatically delete volumes when you remove a container, nor will it “garbage collect” volumes that are no longer referenced by a container.</p>
 
 <h1>
 <a id="go" class="anchor" href="#go" aria-hidden="true"><span class="octicon octicon-link"></span></a>Go</h1>
