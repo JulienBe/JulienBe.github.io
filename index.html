@@ -24,7 +24,7 @@
 <ul>
 <li>List images : docker images</li>
 <li>List all containers : docker ps -a</li>
-<li>Load an image into the container : docker run imageName</li>
+<li>Load an image into the container : docker run imageName. The RUN command just run during docker build phase</li>
 <li>docker run -i -t imageName /bin/bash : <strong>i</strong>nteractive with a <strong>t</strong>ty</li>
 </ul>
 
@@ -49,7 +49,7 @@
 <p>You can add a data volume to a container using the -v flag with the docker create and docker run command. You can use the -v multiple times to mount multiple data volumes.</p>
 
 <blockquote>
-<p>$ docker run -d -P --name web -v /webapp training/webapp python app.py</p>
+<p>$ docker run -it -<strong>v</strong> /webapp training/webapp mysql bash</p>
 </blockquote>
 
 <p>This will create a new volume inside a container at <em>/webapp</em></p>
