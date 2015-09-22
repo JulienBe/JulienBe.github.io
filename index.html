@@ -27,6 +27,7 @@
 <li>Load an image into the container : docker run imageName. The RUN command just run during docker build phase</li>
 <li>docker run -i -t imageName /bin/bash : <strong>i</strong>nteractive with a <strong>t</strong>ty</li>
 <li>docker run -d -P name : -<strong>d</strong>etached -P for exposed ports</li>
+<li>docker run with volume : docker run <strong>-v /host/file:/container/file</strong> name command</li>
 <li>Get ip : docker inspect -f '{{ .NetworkSettings.IPAddress }}'</li>
 <li>Shell into running container : docker exec -it name bash</li>
 <li>build image : docker build -t name .</li>
