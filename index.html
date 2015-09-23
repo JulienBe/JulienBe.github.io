@@ -31,6 +31,7 @@
 <li>Get ip : docker inspect -f '{{ .NetworkSettings.IPAddress }}'</li>
 <li>Shell into running container : docker exec -it name bash</li>
 <li>build image : docker build -t name .</li>
+<li>Delete all containers : docker rm $(docker ps -a -q)</li>
 </ul>
 
 <h2>
