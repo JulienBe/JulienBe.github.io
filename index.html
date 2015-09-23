@@ -457,7 +457,8 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 <h2>
 <a id="backup" class="anchor" href="#backup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Backup</h2>
 
-<p>mysqldump -uuser -ppaswword <strong>--all-databases</strong> &gt; /path/file</p>
+<p>mysqldump -uuser -ppaswword <strong>--all-databases</strong> &gt; /path/file
+mysqldump: Got error: 1286: Unknown table engine 'PERFORMANCE_SCHEMA' when using LOCK TABLES =&gt; <em>rm -rf /var/lib/mysql/ib_logfile</em>. <em>service mysqld restart</em></p>
 
 <h2>
 <a id="error-1206-hy000-the-total-number-of-locks-exceeds-the-lock-table-size" class="anchor" href="#error-1206-hy000-the-total-number-of-locks-exceeds-the-lock-table-size" aria-hidden="true"><span class="octicon octicon-link"></span></a>ERROR 1206 (HY000): The total number of locks exceeds the lock table size</h2>
