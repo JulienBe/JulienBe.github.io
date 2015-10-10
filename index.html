@@ -119,6 +119,17 @@
 <p>This will mount the host directory, /src/webapp, into the container at /opt/webapp.</p>
 
 <h1>
+<a id="grails" class="anchor" href="#grails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Grails</h1>
+
+<p>If stuck a <em>starting application</em>, in Config.groovy : </p>
+
+<div class="highlight highlight-source-groovy"><pre>log4j<span class="pl-k">.</span>main <span class="pl-k">=</span> {
+    error  <span class="pl-s"><span class="pl-pds">'</span>org.codehaus.groovy.grails.web.servlet<span class="pl-pds">'</span></span>, <span class="pl-c">// change error to all     </span>
+    all  <span class="pl-s"><span class="pl-pds">'</span>org.codehaus.groovy.grails.web.servlet<span class="pl-pds">'</span></span>,        
+<span class="pl-k">..</span>.
+}</pre></div>
+
+<h1>
 <a id="go" class="anchor" href="#go" aria-hidden="true"><span class="octicon octicon-link"></span></a>Go</h1>
 
 <h2>
