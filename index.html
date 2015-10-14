@@ -948,6 +948,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 <li>/etc/init.d/iptables stop : deactivate firewall</li>
 <li>chkconfig iptables off : deactivate firewall on boot</li>
 <li>find . -type f -size +100M</li>
+<li>Enable network on minimal CentOS : edit <strong>etc/sysconfig/network-scripts-ifcfg-whatever</strong> and set <strong>ONBOOT=yes</strong> then <strong>/etc/init.d/network</strong> restart</li>
 </ul>
 
 <h1>
