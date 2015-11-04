@@ -956,19 +956,24 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </ul>
 
 <h1>
-<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h1>
+<a id="java-world" class="anchor" href="#java-world" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java World</h1>
 
-<ul>
-<li>run specific test : mvn <strong>-Dtest=TestNameOrPattern</strong> clean test</li>
-</ul>
+<p>java:global/[]//!</p>
 
-<h1>
-<a id="mockito" class="anchor" href="#mockito" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mockito</h1>
+<h3>
+<a id="mockito" class="anchor" href="#mockito" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mockito</h3>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">import static</span> <span class="pl-smi">org.mockito.Mockito.*</span>;
 
 <span class="pl-smi">MyClass</span> c <span class="pl-k">=</span> mock(<span class="pl-smi">MyClass</span><span class="pl-k">.</span>class);
 when(o<span class="pl-k">.</span>method())<span class="pl-k">.</span>thenReturn(<span class="pl-s"><span class="pl-pds">"</span>return<span class="pl-pds">"</span></span>);</pre></div>
+
+<h3>
+<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h3>
+
+<ul>
+<li>run specific test : mvn <strong>-Dtest=TestNameOrPattern</strong> clean test</li>
+</ul>
 
       <footer class="site-footer">
 
