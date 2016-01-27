@@ -17,52 +17,52 @@
 
     <section class="main-content">
       <h1>
-<a id="pres" class="anchor" href="#pres" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pres</h1>
+<a id="pres" class="anchor" href="#pres" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pres</h1>
 
 <h2>
-<a id="coding-principles" class="anchor" href="#coding-principles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Coding principles</h2>
+<a id="coding-principles" class="anchor" href="#coding-principles" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Coding principles</h2>
 
 <ul>
 <li><a href="http://www.infoq.com/presentations/solid-principles">Are You a SOLID Coder?</a></li>
 </ul>
 
 <h2>
-<a id="jvm" class="anchor" href="#jvm" aria-hidden="true"><span class="octicon octicon-link"></span></a>JVM</h2>
+<a id="jvm" class="anchor" href="#jvm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JVM</h2>
 
 <ul>
 <li><a href="https://www.parleys.com/tutorial/a-jvm-does-what">A JVM does what ???</a></li>
 </ul>
 
 <h2>
-<a id="scala" class="anchor" href="#scala" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scala</h2>
+<a id="scala" class="anchor" href="#scala" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scala</h2>
 
 <ul>
 <li><a href="https://www.youtube.com/watch?v=LH75sJAR0hc">Why Scala?</a></li>
 </ul>
 
 <h2>
-<a id="java" class="anchor" href="#java" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java</h2>
+<a id="java" class="anchor" href="#java" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Java</h2>
 
 <ul>
 <li><a href="https://www.parleys.com/tutorial/java-8-anger-1">Java 8 in angar</a></li>
 </ul>
 
 <h2>
-<a id="social" class="anchor" href="#social" aria-hidden="true"><span class="octicon octicon-link"></span></a>Social</h2>
+<a id="social" class="anchor" href="#social" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Social</h2>
 
 <ul>
 <li><a href="https://www.parleys.com/tutorial/the-problem-with-women-a-technical-approach">The Problem With Women: A Technical Approach</a></li>
 </ul>
 
 <h2>
-<a id="git" class="anchor" href="#git" aria-hidden="true"><span class="octicon octicon-link"></span></a>Git</h2>
+<a id="git" class="anchor" href="#git" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Git</h2>
 
 <ul>
 <li><a href="https://www.youtube.com/watch?v=sevc6668cQ0">Knowledge is Power: Getting out of trouble by understanding Git</a></li>
 </ul>
 
 <h1>
-<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Docker</h1>
+<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Docker</h1>
 
 <p>The directory is the context to build the image</p>
 
@@ -77,10 +77,11 @@
 <li>Shell into running container : docker exec -it name bash</li>
 <li>build image : docker build -t name .</li>
 <li>Delete all containers : docker rm $(docker ps -a -q)</li>
+<li>Change storage option : In <em>/etc/sysconfig/docker-storage</em> : DOCKER_STORAGE_OPTIONS= --storage-opt dm.basesize=20G</li>
 </ul>
 
 <h2>
-<a id="data-volumes" class="anchor" href="#data-volumes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data volumes</h2>
+<a id="data-volumes" class="anchor" href="#data-volumes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data volumes</h2>
 
 <p>It's a directory within one or more containers that bypasses the Union File System. They provide :</p>
 
@@ -95,7 +96,7 @@
 <p>Data volumes are designed to persist data, independent of the container’s life cycle. Docker therefore never automatically delete volumes when you remove a container, nor will it “garbage collect” volumes that are no longer referenced by a container.</p>
 
 <h3>
-<a id="adding-a-data-volume" class="anchor" href="#adding-a-data-volume" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a data volume</h3>
+<a id="adding-a-data-volume" class="anchor" href="#adding-a-data-volume" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding a data volume</h3>
 
 <p>You can add a data volume to a container using the -v flag with the docker create and docker run command. You can use the -v multiple times to mount multiple data volumes.</p>
 
@@ -106,7 +107,7 @@
 <p>This will create a new volume inside a container at <em>/webapp</em></p>
 
 <h3>
-<a id="locating-a-volume" class="anchor" href="#locating-a-volume" aria-hidden="true"><span class="octicon octicon-link"></span></a>Locating a volume</h3>
+<a id="locating-a-volume" class="anchor" href="#locating-a-volume" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Locating a volume</h3>
 
 <p>You can locate the volume on the host by utilizing the ‘docker inspect’ command.</p>
 
@@ -115,7 +116,7 @@
 </blockquote>
 
 <h3>
-<a id="mount-a-host-directory-as-a-data-volume" class="anchor" href="#mount-a-host-directory-as-a-data-volume" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mount a host directory as a data volume</h3>
+<a id="mount-a-host-directory-as-a-data-volume" class="anchor" href="#mount-a-host-directory-as-a-data-volume" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mount a host directory as a data volume</h3>
 
 <p>In addition to creating a volume using the -v flag you can also mount a directory from your Docker daemon’s host into a container.</p>
 
@@ -126,7 +127,7 @@
 <p>This will mount the host directory, /src/webapp, into the container at /opt/webapp.</p>
 
 <h1>
-<a id="grails" class="anchor" href="#grails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Grails</h1>
+<a id="grails" class="anchor" href="#grails" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Grails</h1>
 
 <p>If stuck a <em>starting application</em>, in Config.groovy : </p>
 
@@ -137,13 +138,13 @@
 }</pre></div>
 
 <h1>
-<a id="go" class="anchor" href="#go" aria-hidden="true"><span class="octicon octicon-link"></span></a>Go</h1>
+<a id="go" class="anchor" href="#go" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go</h1>
 
 <h2>
-<a id="slices-and-arrays" class="anchor" href="#slices-and-arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slices and Arrays</h2>
+<a id="slices-and-arrays" class="anchor" href="#slices-and-arrays" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Slices and Arrays</h2>
 
 <h3>
-<a id="arrays" class="anchor" href="#arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrays</h3>
+<a id="arrays" class="anchor" href="#arrays" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Arrays</h3>
 
 <p>An array type definition specifies a <strong>length</strong> and an <strong>element type</strong>. An array's size is fixed; its length is part of its type ([4]int and [5]int are distinct, incompatible types).</p>
 
@@ -167,7 +168,7 @@ Or, you can have the compiler count the array elements for you:</p>
 In both cases, the type of b is [2]string.</p>
 
 <h3>
-<a id="slices" class="anchor" href="#slices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slices</h3>
+<a id="slices" class="anchor" href="#slices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Slices</h3>
 
 <p>The type specification for a slice is []T, where T is the type of the elements of the slice. Unlike an array type, a <strong>slice type has no specified length.</strong></p>
 
@@ -185,7 +186,7 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 <span class="pl-c">// s == []byte{0, 0, 0, 0, 0}</span></pre></div>
 
 <h1>
-<a id="typical-memory-usage" class="anchor" href="#typical-memory-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Typical memory usage</h1>
+<a id="typical-memory-usage" class="anchor" href="#typical-memory-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Typical memory usage</h1>
 
 <table>
 <thead>
@@ -255,10 +256,10 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 </table>
 
 <h1>
-<a id="union-find" class="anchor" href="#union-find" aria-hidden="true"><span class="octicon octicon-link"></span></a>Union Find</h1>
+<a id="union-find" class="anchor" href="#union-find" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Union Find</h1>
 
 <h2>
-<a id="quick-find---eager-approach" class="anchor" href="#quick-find---eager-approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Find - Eager approach</h2>
+<a id="quick-find---eager-approach" class="anchor" href="#quick-find---eager-approach" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Find - Eager approach</h2>
 
 <p>Begin with id[], if two given objects have the same id, they are connected</p>
 
@@ -364,7 +365,7 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 <p>So there can ben a lot of changes. Checking if two elements are connected is very fast but building the array is very slow. N union on N objects is quadratic</p>
 
 <h2>
-<a id="quick-union---lazy-approach" class="anchor" href="#quick-union---lazy-approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick union - Lazy approach</h2>
+<a id="quick-union---lazy-approach" class="anchor" href="#quick-union---lazy-approach" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick union - Lazy approach</h2>
 
 <pre><code>0-1-2-3-4-5-6-7-8-9 
 </code></pre>
@@ -417,7 +418,7 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 <p>Now building the tree is quick but finding if two elements are connected can be quite slow (Can go up to N)</p>
 
 <h2>
-<a id="quick-union---weighted" class="anchor" href="#quick-union---weighted" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Union - Weighted</h2>
+<a id="quick-union---weighted" class="anchor" href="#quick-union---weighted" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Union - Weighted</h2>
 
 <p>The difference here is that we link to root of the smaller tree to the root of the bigger tree. The goal is to avoid getting tall trees</p>
 
@@ -451,7 +452,7 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 </code></pre>
 
 <h1>
-<a id="order-of-growth" class="anchor" href="#order-of-growth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Order of growth</h1>
+<a id="order-of-growth" class="anchor" href="#order-of-growth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Order of growth</h1>
 
 <table>
 <thead>
@@ -509,21 +510,21 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 </table>
 
 <h1>
-<a id="mysql" class="anchor" href="#mysql" aria-hidden="true"><span class="octicon octicon-link"></span></a>MySQL</h1>
+<a id="mysql" class="anchor" href="#mysql" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MySQL</h1>
 
 <h2>
-<a id="backup" class="anchor" href="#backup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Backup</h2>
+<a id="backup" class="anchor" href="#backup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Backup</h2>
 
 <p>mysqldump -uuser -ppaswword <strong>--all-databases</strong> &gt; /path/file
 mysqldump: Got error: 1286: Unknown table engine 'PERFORMANCE_SCHEMA' when using LOCK TABLES =&gt; <em>rm -rf /var/lib/mysql/ib_logfile</em>. <em>service mysqld restart</em></p>
 
 <h2>
-<a id="error-1206-hy000-the-total-number-of-locks-exceeds-the-lock-table-size" class="anchor" href="#error-1206-hy000-the-total-number-of-locks-exceeds-the-lock-table-size" aria-hidden="true"><span class="octicon octicon-link"></span></a>ERROR 1206 (HY000): The total number of locks exceeds the lock table size</h2>
+<a id="error-1206-hy000-the-total-number-of-locks-exceeds-the-lock-table-size" class="anchor" href="#error-1206-hy000-the-total-number-of-locks-exceeds-the-lock-table-size" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ERROR 1206 (HY000): The total number of locks exceeds the lock table size</h2>
 
 <p>It doesn’t have enough room to store all of the row locks that it would need to execute your query. </p>
 
 <h3>
-<a id="fixes" class="anchor" href="#fixes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fixes</h3>
+<a id="fixes" class="anchor" href="#fixes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fixes</h3>
 
 <ul>
 <li>Adjust innodb_buffer_pool_size and restart MySQL. By default, this is set to only 8MB.</li>
@@ -531,14 +532,14 @@ mysqldump: Got error: 1286: Unknown table engine 'PERFORMANCE_SCHEMA' when using
 </ul>
 
 <h2>
-<a id="mysql-replication" class="anchor" href="#mysql-replication" aria-hidden="true"><span class="octicon octicon-link"></span></a>MySQL replication</h2>
+<a id="mysql-replication" class="anchor" href="#mysql-replication" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MySQL replication</h2>
 
 <p>One of the difficulties with a large and active MySQL database is making clean backups without having to bring the server down. Otherwise, a backup may slow down the system and there may be inconsistency with data, since related tables may be changed while another is being backed up. Taking the server down will ensure consistency of data, but it means interruption of service to users. Sometimes this is necessary and unavoidable, but daily server outages for backing up data may be unacceptable. A simple alternative method to ensure reliable backups without having to shut down the server daily is to set up replication for MySQL.</p>
 
 <p>Typically, replication is a system configuration whereby the MySQL server, known in this context as a master server, houses the data and handles client requests, while another MySQL server (a slave server) contains a complete copy of the data and duplicates all SQL statements in which data is changed on the master server right after it happens. There are several uses for replication (e.g., load balancing), but the concern of this article has to do with using replication for data backups. You can set up a separate server to be a slave and then once a day turn replication off to make a clean backup. When you're done, replication can be restarted and the slave will automatically query the master for the changes to the data that it missed while it was offline. Replication is an excellent feature and it's part of MySQL. You just need to set it up.</p>
 
 <h3>
-<a id="the-replication-process" class="anchor" href="#the-replication-process" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Replication Process</h3>
+<a id="the-replication-process" class="anchor" href="#the-replication-process" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Replication Process</h3>
 
 <p>Before explaining how to set up replication, let me quickly explain the steps that MySQL goes through to maintain a replicated server. The process is different depending on the version of MySQL. For purposes of this article, my comments will be for version 4.0 or higher, since most systems now are using the later versions.</p>
 
@@ -547,7 +548,7 @@ mysqldump: Got error: 1286: Unknown table engine 'PERFORMANCE_SCHEMA' when using
 <p>This process may seem involved and complicated at first glance, but it all occurs quickly, it isn't a significant drain on the master server, and it ensures reliable replication. Also, it's surprisingly easy to set up. It only requires a few lines of options to be added to the configuration file (i.e., my.cnf) on the master and slave servers. If you're dealing with a new server, you'll need to copy the databases on the master server to the slave to get it caught up. Then it's merely a matter of starting the slave for it to begin replicating.</p>
 
 <h3>
-<a id="the-replication-user" class="anchor" href="#the-replication-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Replication User</h3>
+<a id="the-replication-user" class="anchor" href="#the-replication-user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Replication User</h3>
 
 <p>There are only a few steps to setting up replication. The first step is to set up a user account to use only for replication. It's best not to use an existing account for security reasons. To do this, enter an SQL statement like the following on the master server, logged in as root or a user that has GRANT OPTION privileges:</p>
 
@@ -559,7 +560,7 @@ mysqldump: Got error: 1286: Unknown table engine 'PERFORMANCE_SCHEMA' when using
 <p>In this SQL statement, the user account replicant is granted only what's needed for replication. The user name can be almost anything. The host name (or IP address) is given in quotes. You should enter this same statement on the slave server with the same user name and password, but with the master's host name or IP address. This way, if the master fails and will be down for a while, you could redirect users to the slave with DNS or by some other method. When the master is back up, you can then use replication to get it up to date by temporarily making it a slave to the former slave server. Incidentally, if you upgraded MySQL to version 4.0 recently, but didn't upgrade your mysql database, the GRANT statement above won't work because these privileges didn't exist in the earlier versions. For information on fixing this problem, see MySQL's documentation on Upgrading the Grants Tables.</p>
 
 <h3>
-<a id="configuring-the-servers" class="anchor" href="#configuring-the-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuring the Servers</h3>
+<a id="configuring-the-servers" class="anchor" href="#configuring-the-servers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuring the Servers</h3>
 
 <p>Once the replication user is set up on both servers, we will need to add some lines to the MySQL configuration file on the master and on the slave server. Depending on the type of operating system, the file will probably be called my.cnf or my.ini. On Unix-type systems, the configuration file is usually located in the /etc directory. On Windows systems, it's usually located in c:\ or in c:\Windows. Using a text editor, add the following lines to the configuration file, under the [mysqld] group heading:</p>
 
@@ -590,7 +591,7 @@ relay<span class="pl-k">-</span>log<span class="pl-k">-</span>index <span class=
 <p>The last two stanzas above set up logging. The second to last stanza starts binary logging as we did on the master server, but this time on the slave. This is the log that can be used to allow the master and the slave to reverse roles, as mentioned earlier. The binary log index file (log-bin.index) is for recording the name of the current binary log file to use. As the server is restarted or the logs are flushed, the current log file changes and its name is recorded here. The log-error option establishes an error log. If you don't already have this set up, you should, since it's where any problems with replication will be recorded. The last stanza establishes the relay log and related files mentioned earlier. The relay log makes a copy of each entry in the master server's binary log for performance's sake, the relay-log-info-file option names the file where the slave's position in the master's binary log will be noted, and the relay log index file is for keeping track of the name of the current relay log file to use for replicating.</p>
 
 <h3>
-<a id="copying-databases-and-starting-replication" class="anchor" href="#copying-databases-and-starting-replication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copying Databases and Starting Replication</h3>
+<a id="copying-databases-and-starting-replication" class="anchor" href="#copying-databases-and-starting-replication" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copying Databases and Starting Replication</h3>
 
 <p>If you're setting up a new master server that doesn't contain data, then there's nothing left to do but restart the slave server. However, if you're setting up replication with an existing server that already has data on it, you will need to make an initial backup of the databases and copy it to the slave server. There are many methods to do this; for our examples, we'll use the utility mysqldump to make a backup while the server is running. However, there's still the problem with attaining consistency of data on an active server. Considering the fact that once you set up replication you may never have to shut down your server for backups again, it might be worth while at least to lock the users out this one last time to get a clean, consistent backup. To run the master server so that only root has access, we can reset the variable max_connections like so:</p>
 
@@ -636,7 +637,7 @@ CHANGE MASTER TO MASTER_LOG_POS<span class="pl-k">=</span><span class="pl-c1">42
 <p>After this statement is run, the slave will connect to the master and get the changes it missed since the backup. From there, it will stay current by continuously checking the binary log as outlined before.</p>
 
 <h2>
-<a id="backups-with-replication" class="anchor" href="#backups-with-replication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Backups with Replication</h2>
+<a id="backups-with-replication" class="anchor" href="#backups-with-replication" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Backups with Replication</h2>
 
 <p>With replication running, it's an easy task to make a backup of the data. You just need to temporarily stop the slave server from replicating by entering the following SQL statement while logging onto the slave server as root or a user with SUPER privileges: </p>
 
@@ -653,7 +654,7 @@ CHANGE MASTER TO MASTER_LOG_POS<span class="pl-k">=</span><span class="pl-c1">42
 <p>After entering this statement, there should be a flurry of activity on the slave as it executes the SQL statements that occurred while it was down. In a very short period of time it should be current</p>
 
 <h3>
-<a id="automating-backups" class="anchor" href="#automating-backups" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automating Backups</h3>
+<a id="automating-backups" class="anchor" href="#automating-backups" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Automating Backups</h3>
 
 <p>If replication and the backup process are working properly, we can write a simple shell script to stop replication, back up the data on the slave server, and start the slave again. Such a shell script would look something like this:</p>
 
@@ -673,17 +674,17 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 <p>This is a simple script. You may want to write something more elaborate and allow for error checking. You probably would also want to compress the dump files to save space and write them to a removable media like a tape or CD. Once you have your script set up, test it. If it works, you can add it to your crontab or whatever scheduling utility you use on your server.</p>
 
 <h3>
-<a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h3>
+<a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusion</h3>
 
 <p>Replication is a useful administrative feature of MySQL. It's an excellent way to be assured of good regular backups of databases. There are more options and SQL statements available for replication than I was able to present here. I cover them individually in my book MySQL in a Nutshell. For active and large systems, you may want to set up more than one slave server for added protection of data. The configuration and concepts are the same for multiple slaves as it is for one slave. For extremely active and large databases, you might want to consider purchasing software like that offered by Emic. Their software costs a bit, but it does an excellent job of handing slave serves for backups and load balancing, especially.</p>
 
 <h3>
-<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h3>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h3>
 
 <p>To make sure that the replication doesn't collides, make sure that the auto increment offset in my.cnf is set to even on one site, and on odd on the other</p>
 
 <h2>
-<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands</h2>
+<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands</h2>
 
 <ul>
 <li>Check number of connections : <em>show status like 'Con%'</em>
@@ -692,7 +693,7 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 </ul>
 
 <h1>
-<a id="hashset" class="anchor" href="#hashset" aria-hidden="true"><span class="octicon octicon-link"></span></a>HashSet</h1>
+<a id="hashset" class="anchor" href="#hashset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HashSet</h1>
 
 <p>DATA =&gt; Hash() =&gt; bucket</p>
 
@@ -756,10 +757,10 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 <p>Space : O(n)</p>
 
 <h1>
-<a id="data-structures" class="anchor" href="#data-structures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Structures</h1>
+<a id="data-structures" class="anchor" href="#data-structures" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Structures</h1>
 
 <h2>
-<a id="stack" class="anchor" href="#stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stack</h2>
+<a id="stack" class="anchor" href="#stack" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stack</h2>
 
 <p>lifo</p>
 
@@ -770,7 +771,7 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 <p>In array stack : careful for loitering</p>
 
 <h2>
-<a id="queue" class="anchor" href="#queue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Queue</h2>
+<a id="queue" class="anchor" href="#queue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Queue</h2>
 
 <p>fifo</p>
 
@@ -778,7 +779,7 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 </code></pre>
 
 <h2>
-<a id="bloom-filter" class="anchor" href="#bloom-filter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bloom filter</h2>
+<a id="bloom-filter" class="anchor" href="#bloom-filter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bloom filter</h2>
 
 <p>A Bloom filter is a data structure designed to tell you, rapidly and <strong>memory-efficiently</strong>, whether an element is present in a set. </p>
 
@@ -819,7 +820,7 @@ mysqladmin --user=root --password=my_pwd start-slave</pre></div>
 You'll want your hash functions to be evenly and randomly distributed</p>
 
 <h3>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
 
 <pre><code>* Ant -&gt; hash1() -&gt; cell 1
 * Ant -&gt; hash2() -&gt; cell 5
@@ -837,14 +838,14 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </code></pre>
 
 <h3>
-<a id="get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get</h3>
+<a id="get" class="anchor" href="#get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get</h3>
 
 <p>The element you're trying to get will go trough the same hash functions, this will tell you which cells to look for. If one of those is off, the element cannot be there. If all are on, there is a fairly good chance that it has already been added.</p>
 
 <p>You may have <strong>false positives</strong> but <strong>no false negative</strong>. The error rate can be tuned by varying the lenght of the array and the number of hash functions</p>
 
 <h3>
-<a id="notes-1" class="anchor" href="#notes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h3>
+<a id="notes-1" class="anchor" href="#notes-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h3>
 
 <ul>
 <li>You can't remove an item from an hash function... 'cause the cells might have been turned on by other things too</li>
@@ -854,7 +855,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </ul>
 
 <h3>
-<a id="tuning" class="anchor" href="#tuning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tuning</h3>
+<a id="tuning" class="anchor" href="#tuning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tuning</h3>
 
 <p>The probability of false positive : <strong>(1 - e<sup>-kn/m</sup>)<sup><sup>k</sup></sup></strong> </p>
 
@@ -913,14 +914,14 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 <p><strong>(1 - e<sup>-kn/m</sup>)<sup><sup></sup></sup></strong><em>k</em><strong></strong> </p>
 
 <h1>
-<a id="xa" class="anchor" href="#xa" aria-hidden="true"><span class="octicon octicon-link"></span></a>XA</h1>
+<a id="xa" class="anchor" href="#xa" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>XA</h1>
 
 <p>This is a <strong>global transaction</strong> that may span <strong>multiple resources</strong>. On the opposite, a non-XA transaction always involves only one resource. </p>
 
 <p>So it involves <em>a coordinating transaction manager</em>, with one or more databases (or other resources, like JMS) all involved in a single global transaction. It coordinates all of this through a protocol called Two Phase Commit (2PC). This protocol also has to be supported by the individual resources. </p>
 
 <h1>
-<a id="this-is-not-the-grub-you-are-looking-for" class="anchor" href="#this-is-not-the-grub-you-are-looking-for" aria-hidden="true"><span class="octicon octicon-link"></span></a>This is not the GRUB you are looking for</h1>
+<a id="this-is-not-the-grub-you-are-looking-for" class="anchor" href="#this-is-not-the-grub-you-are-looking-for" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>This is not the GRUB you are looking for</h1>
 
 <ol>
 <li>Download <a href="http://unetbootin.github.io/">http://unetbootin.github.io/</a>
@@ -931,7 +932,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </ol>
 
 <h1>
-<a id="install-mysql-on-centos" class="anchor" href="#install-mysql-on-centos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install MySQL on CentOS</h1>
+<a id="install-mysql-on-centos" class="anchor" href="#install-mysql-on-centos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install MySQL on CentOS</h1>
 
 <ol>
 <li>Install MySQL server and MySQL client : <em>yum install mysql-server mysql</em>
@@ -945,7 +946,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </ol>
 
 <h1>
-<a id="useful-commands" class="anchor" href="#useful-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Useful commands</h1>
+<a id="useful-commands" class="anchor" href="#useful-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Useful commands</h1>
 
 <ul>
 <li>df -h as in <strong>D</strong>isk <strong>F</strong>ree -<strong>h</strong>uman readable</li>
@@ -963,12 +964,12 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 </ul>
 
 <h1>
-<a id="java-world" class="anchor" href="#java-world" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java World</h1>
+<a id="java-world" class="anchor" href="#java-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Java World</h1>
 
 <p>java:global/[]//!</p>
 
 <h3>
-<a id="mockito" class="anchor" href="#mockito" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mockito</h3>
+<a id="mockito" class="anchor" href="#mockito" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mockito</h3>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">import static</span> <span class="pl-smi">org.mockito.Mockito.*</span>;
 
@@ -976,7 +977,7 @@ You'll want your hash functions to be evenly and randomly distributed</p>
 when(o<span class="pl-k">.</span>method())<span class="pl-k">.</span>thenReturn(<span class="pl-s"><span class="pl-pds">"</span>return<span class="pl-pds">"</span></span>);</pre></div>
 
 <h3>
-<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h3>
+<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Maven</h3>
 
 <ul>
 <li>run specific test : mvn <strong>-Dtest=TestNameOrPattern</strong> clean test</li>
