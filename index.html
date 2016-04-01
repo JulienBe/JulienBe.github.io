@@ -520,6 +520,11 @@ s = <span class="pl-c1">make</span>([]<span class="pl-k">byte</span>, <span clas
 <a id="mysql" class="anchor" href="#mysql" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MySQL</h1>
 
 <h2>
+<a id="max_connections" class="anchor" href="#max_connections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>max_connections</h2>
+
+<p>The maximum number of connections MySQL can support depends on the quality of the thread library on a given platform, the amount of RAM available, how much RAM is used for each connection, the workload from each connection, and the desired response time. Linux or Solaris should be able to support at 500 to 1000 simultaneous connections routinely and as many as 10,000 connections if you have many gigabytes of RAM available and the workload from each is low or the response time target undemanding.</p>
+
+<h2>
 <a id="backup" class="anchor" href="#backup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Backup</h2>
 
 <p>mysqldump -uuser -ppaswword <strong>--all-databases</strong> &gt; /path/file
