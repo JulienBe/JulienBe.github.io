@@ -36,6 +36,15 @@ This is a CLI utility for displaying current network utilization by process, con
 
 # Kitty
 
+The fast, feature-rich, GPU based terminal emulator
+
+- Offloads rendering to the GPU for lower system load
+- Uses threaded rendering for absolutely minimal latency
+
+kitty +kitten ssh myserver
+
+![demo](https://sw.kovidgoyal.net/kitty/_images/screenshot.png)
+
 # Pretty Darcs diff
 
 darcs diff --diff-command "kitty +kitten diff %1 %2"
