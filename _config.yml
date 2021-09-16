@@ -1,0 +1,8 @@
+title: Julienbe.GitHub.io
+description: Memo
+google_analytics: UA-51057524-6
+show_downloads: true
+theme: jekyll-theme-midnight
+
+gems:
+  - jekyll-mentions
